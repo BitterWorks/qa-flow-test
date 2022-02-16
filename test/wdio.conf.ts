@@ -1,3 +1,6 @@
+import { config as envconf } from "dotenv";
+
+envconf();
 const port = 4444;
 const hostname = "localhost";
 const path = "/wd/hub";
@@ -82,7 +85,8 @@ export const config: WebdriverIO.Config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: ["firefox", "chrome", "MicrosoftEdge"].map(name => {
+    capabilities: process.env.BROWSERS.split(",").map(name => {
+        // console.log(process.env.BROWSERS)
         return {browserName: name, port, hostname, path, protocol}
     }),
     //
