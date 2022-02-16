@@ -4,10 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "clean": "rimraf .tsbuid && rimraf allure-results && rimraf allure-report && rimraf junit-results",
-        "clean-report": "allure generate --clean ./allure-results",
-        "wdio": "npm run clean && wdio run test/wdio.conf.ts && npm run clean report"
+        "report": "allure generate ./allure-results --clean -o allure-reports",
+        "wdio": "wdio run test/wdio.conf.ts && npm run report"
     },
     "repository": {
         "type": "git",
