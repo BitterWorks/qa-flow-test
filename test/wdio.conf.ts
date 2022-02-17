@@ -1,11 +1,6 @@
 import { config as envconf } from "dotenv";
 
 envconf();
-const port = Number(process.env.HUB_PORT);
-const hostname = process.env.HOSTNAME;
-const path = "/wd/hub";
-const protocol = "http";
-
 
 export const config: WebdriverIO.Config = {
     //
@@ -86,8 +81,11 @@ export const config: WebdriverIO.Config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: process.env.BROWSERS.split(",").map(name => {
-        // console.log(process.env.BROWSERS)
-        return {browserName: name, port, hostname, path, protocol}
+        return {
+            browserName: name,
+            port: Number(process.env.HUB_PORT),
+            hostname: process.env.HOSTNAME
+        };
     }),
     //
     // ===================
