@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "report": "allure generate ./allure-results --clean -o allure-reports",
-        "wdio": "wdio run test/wdio.conf.ts && npm run report",
+        "wdio": "wdio run wdio.conf.ts && npm run report",
         "autogen": "npx cucumber-generator --output=file -f=features --template=cucumber --outputDirectory=features/step-definitions/"
     },
     "repository": {

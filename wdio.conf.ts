@@ -27,7 +27,7 @@ export const config: WebdriverIO.Config = {
         // for all available options
         tsNodeOpts: {
             transpileOnly: true,
-            project: 'test/tsconfig.json'
+            project: 'tsconfig.json'
         }
         // tsconfig-paths is only used if "tsConfigPathsOpts" are provided, if you
         // do please make sure "tsconfig-paths" is installed as dependency
@@ -84,7 +84,9 @@ export const config: WebdriverIO.Config = {
         return {
             browserName: name,
             port: Number(process.env.HUB_PORT),
-            hostname: process.env.HOSTNAME
+            hostname: process.env.HOSTNAME,
+            path: "/wd/hub",
+            protocol: "http"
         };
     }),
     //
