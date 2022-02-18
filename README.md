@@ -29,3 +29,30 @@ BASE_URL=http://localhost
 ```sh
 npm run wdio
 ```
+
+## Make tests
+1. Create a user story file with params using the `.feature` extension right under the `/features/` dir:
+```.feature
+Feature: NavBar Title
+
+    Scenario Outline: As a user, I can see the title of the website in the navbar.
+
+        Given I open the browser and load the url <homepageUrl>
+        Then I should see a title with text <titleText>
+
+        Examples:
+            | homepageUrl               | titleText |
+            | http://localhost:37551/   | Frutapp   |
+```
+2. Autogenerate spec/test file for the `*.feature` file you just created:
+```sh
+npm run autogen
+```
+3. Modify imports:
+```ts
+// Change this
+import { Given, Then } from "cucumber";
+
+// To This
+import { Given, Then } from "@wdio/cucumber-framework";
+```
