@@ -1,5 +1,6 @@
 export const selectors = {
-    "common": {},
-    "login": {},
-    "fruitDetail":{}
+    common: {},
+    layout: {},
+    home: {},
+    fruitDetail:{}
 };
