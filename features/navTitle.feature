@@ -6,5 +6,5 @@ Feature: NavBar Title
         Then I should see a title with text <titleText>
 
         Examples:
-            | homepageUrl               | titleText |
-            | http://localhost:37551/   | Frutapp   |
+            | homepageUrl                   | titleText |
+            | http://svelte_template:3000   | Frutapp   |
