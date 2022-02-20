@@ -44,7 +44,7 @@ Feature: NavBar Title
             | homepageUrl               | titleText |
             | http://localhost:37551/   | Frutapp   |
 ```
-2. Autogenerate spec/test file for the `*.feature` file you just created:
+2. Autogenerate spec/test file for the `*.feature` file you just created (works for up to one variable per statment, if you have more than one variable use [tidy-gherkin](https://chrome.google.com/webstore/detail/tidy-gherkin/nobemmencanophcnicjhfhnjiimegjeo?hl=en-GB) instead):
 ```sh
 npm run autogen
 ```
@@ -56,3 +56,4 @@ import { Given, Then } from "cucumber";
 // To This
 import { Given, Then } from "@wdio/cucumber-framework";
 ```
+4. Add `async` keyword to arrow functions.
