@@ -9,8 +9,6 @@ Feature: Create Fruit
         Examples:
             | fruitName | color     | amount    |
             | Naranja   | naranja   | 12        |
-            | Maracuyá  | amarillo  | 3         |
-            | Pera      | amarillo  | 5         |
     
     # TODO: Implement
     # Scenario: As a user, I don't want to be able to create a fruit if it's duplicated
