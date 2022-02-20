@@ -1,24 +1,7 @@
 {
-    "name": "qa-flow-test",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "report": "allure generate ./allure-results --clean -o allure-reports",
-        "wdio": "wdio run wdio.conf.ts && npm run report",
-        "autogen": "npx cucumber-generator --output=file -f=features --template=cucumber --outputDirectory=features/step-definitions/"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/BitterWorks/qa-flow-test.git"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/BitterWorks/qa-flow-test/issues"
-    },
-    "homepage": "https://github.com/BitterWorks/qa-flow-test#readme",
+    "name": "webdriverio-tests",
+    "version": "0.1.0",
+    "private": true,
     "devDependencies": {
         "@wdio/allure-reporter": "^7.16.14",
         "@wdio/cli": "^7.16.15",
@@ -26,11 +9,12 @@
         "@wdio/junit-reporter": "^7.16.15",
         "@wdio/local-runner": "^7.16.15",
         "@wdio/spec-reporter": "^7.16.14",
-        "cucumber-generator": "^1.1.10",
-        "dotenv": "^16.0.0",
+        "chromedriver": "^98.0.1",
         "ts-node": "^10.5.0",
         "typescript": "^4.5.5",
-        "wdio-docker-service": "^3.2.0"
+        "wdio-chromedriver-service": "^7.2.8"
     },
-    "dependencies": {}
+    "scripts": {
+        "wdio": "wdio run test/wdio.conf.ts"
+    }
 }
