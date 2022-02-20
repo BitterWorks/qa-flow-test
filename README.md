@@ -10,19 +10,15 @@ docker-compose up -d
 
 ## Configuration
 ### Allure Reports
-To see the allure reports for your project, go to `http://localhost:5050/allure-docker-service/projects/default/reports/latest/index.html`.
+To see the allure reports for your project, run .
 
 ### .env file
 Sample `.env` file:
 ```.env
 # Comma separated browsers. i.e: firefox,MicrosoftEdge
 BROWSERS=chrome
-# Selenium Hub port
-HUB_PORT=4444
-# Name of the host
-HOSTNAME=localhost
-# Base url to make tests against
-BASE_URL=http://localhost
+# Frontend url in our system
+BASE_URL=http://localhost:3000/
 ```
 
 ## Run tests
@@ -44,7 +40,7 @@ Feature: NavBar Title
             | homepageUrl               | titleText |
             | http://localhost:37551/   | Frutapp   |
 ```
-2. Autogenerate spec/test file for the `*.feature` file you just created (works for up to one variable per statment, if you have more than one variable use [tidy-gherkin](https://chrome.google.com/webstore/detail/tidy-gherkin/nobemmencanophcnicjhfhnjiimegjeo?hl=en-GB) instead):
+2. Autogenerate spec/test file for the `*.feature` file you just created (works for up to one variable per statment. This will only work for one variable per statement (TODO: PR to extension). If you have more than one variable use [tidy-gherkin](https://chrome.google.com/webstore/detail/tidy-gherkin/nobemmencanophcnicjhfhnjiimegjeo?hl=en-GB) instead):
 ```sh
 npm run autogen
 ```
@@ -57,3 +53,28 @@ import { Given, Then } from "cucumber";
 import { Given, Then } from "@wdio/cucumber-framework";
 ```
 4. Add `async` keyword to arrow functions.
+
+If using **tidy-gherkin**, remove the `this.` keyword from the statement, import those statements and change functions to `async` functions:
+```ts
+// Go from this
+this.Given(/^the user is at homepage$/, function (){
+});
+this.When(/^the user creates fruit with name: (.+), color: (.+) and amount: (.+)$/, function (fruitName, color, amount){
+});
+this.Then(/^the user sees a success message$/, function (){
+});
+this.Then(/^the user validates fruit with name: (.+), color: (.+) and amount: (.+) exists in list$/, function (fruitname, color, amount){
+});
+
+// To this
+import { Given, Then, When } from "@wdio/cucumber-framework";
+
+Given(/^the user is at homepage$/, async () => {
+});
+When(/^the user creates fruit with name: (.+), color: (.+) and amount: (.+)$/, async (fruitName, color, amount) => {
+});
+Then(/^the user sees a success message$/, async () => {
+});
+Then(/^the user validates fruit with name: (.+), color: (.+) and amount: (.+) exists in list$/, async (fruitname, color, amount) => {
+});
+```
