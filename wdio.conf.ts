@@ -1,3 +1,7 @@
+import { config as envconf } from "dotenv";
+
+envconf();
+
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -23,7 +27,7 @@ export const config: WebdriverIO.Config = {
         // for all available options
         tsNodeOpts: {
             transpileOnly: true,
-            project: 'test/tsconfig.json'
+            project: 'tsconfig.json'
         }
         // tsconfig-paths is only used if "tsConfigPathsOpts" are provided, if you
         // do please make sure "tsconfig-paths" is installed as dependency
@@ -76,20 +80,13 @@ export const config: WebdriverIO.Config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
-    
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 5,
-        //
-        browserName: 'chrome',
-        acceptInsecureCerts: true
-        // If outputDir is provided WebdriverIO can capture driver session logs
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
-    }],
+    capabilities: process.env.BROWSERS.split(",").map(browser => {
+        return {
+            maxInstances: 5,
+            browserName: browser,
+            acceptInsecureCerts: true
+        };
+    }),
     //
     // ===================
     // Test Configurations
@@ -159,14 +156,19 @@ export const config: WebdriverIO.Config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec','junit',['allure', {outputDir: 'allure-results'}]],
+    reporters: ['spec','junit',['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+        useCucumberStepReporter: true
+    }]],
 
 
     //
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./features/step-definitions/steps.ts'],
+        require: ['./features/step-definitions/*.ts'],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)

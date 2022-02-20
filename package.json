@@ -15,6 +15,11 @@
         "wdio-chromedriver-service": "^7.2.8"
     },
     "scripts": {
-        "wdio": "wdio run test/wdio.conf.ts"
+        "wdio": "wdio run wdio.conf.ts",
+        "autogen": "npx cucumber-generator --output=file -f=features --template=cucumber --outputDirectory=features/step-definitions/"
+    },
+    "dependencies": {
+        "allure-commandline": "^2.17.2",
+        "dotenv": "^16.0.0"
     }
 }
